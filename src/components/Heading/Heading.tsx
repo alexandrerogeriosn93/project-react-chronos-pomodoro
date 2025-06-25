@@ -1,7 +1,11 @@
 import styles from "./Heading.module.css";
 
-export const Heading = (props: { children: string }) => {
-  return <h1 className={styles.heading}>{props.children}</h1>;
+type HeadingProps = {
+  children: string;
+};
+
+export const Heading = ({ children }: HeadingProps) => {
+  return <h1 className={styles.heading}>{children}</h1>;
 };
 
 export default Heading;
