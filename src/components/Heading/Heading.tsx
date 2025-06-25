@@ -1,7 +1,7 @@
 import styles from "./Heading.module.css";
 
 type HeadingProps = {
-  children: string;
+  children: React.ReactNode;
 };
 
 export const Heading = ({ children }: HeadingProps) => {
