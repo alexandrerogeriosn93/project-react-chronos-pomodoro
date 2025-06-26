@@ -1,6 +1,7 @@
 import { Container } from "./components/Container";
 import { Heading } from "./components/Heading";
 import { Logo } from "./components/Logo";
+import { Menu } from "./components/Menu";
 import "./styles/global.css";
 import "./styles/theme.css";
 
@@ -11,7 +12,7 @@ export const App = () => {
         <Logo />
       </Container>
       <Container>
-        <Heading>Menu</Heading>
+        <Menu />
       </Container>
       <Container>
         <Heading>Form</Heading>
