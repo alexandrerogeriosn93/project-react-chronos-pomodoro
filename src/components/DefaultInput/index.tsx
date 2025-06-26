@@ -14,7 +14,7 @@ export const DefaultInput = ({
   return (
     <>
       {labelText && <label htmlFor={id}>{labelText}</label>}
-      <input type={type} id={id} {...rest} />
+      <input type={type} id={id} {...rest} className={styles.input} />
     </>
   );
 };

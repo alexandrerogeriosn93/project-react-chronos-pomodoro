@@ -21,7 +21,12 @@ export const App = () => {
       <Container>
         <form action="" className="form">
           <div className="formRow">
-            <DefaultInput type="text" id="inputTask" labelText="task" />
+            <DefaultInput
+              type="text"
+              id="inputTask"
+              labelText="task"
+              placeholder="task"
+            />
           </div>
           <div className="formRow">
             <p>Neste ciclo descanse por 5 minutos.</p>
