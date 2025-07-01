@@ -1,8 +1,28 @@
 import { HistoryIcon, HouseIcon, SettingsIcon, SunIcon } from "lucide-react";
+import { useEffect, useState } from "react";
 
 import styles from "./styles.module.css";
 
+type AvailableThemes = "dark" | "light";
+
 export const Menu = () => {
+  const [theme, setTheme] = useState<AvailableThemes>("dark");
+
+  const handleThemeChange = (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => {
+    event.preventDefault();
+
+    setTheme((prevTheme) => {
+      const nextTheme = prevTheme === "dark" ? "light" : "dark";
+      return nextTheme;
+    });
+  };
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
   return (
     <nav className={styles.menu}>
       <a
@@ -34,6 +54,7 @@ export const Menu = () => {
         className={styles.menuLink}
         aria-label="Altera tema"
         title="Alterar tema"
+        onClick={handleThemeChange}
       >
         <SunIcon />
       </a>
