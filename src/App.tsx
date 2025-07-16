@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { TaskContextProvider } from "./contexts/TaskContext";
 import { TaskStateModel } from "./models/TaskStateModel";
 import { Home } from "./pages/Home";
 import "./styles/global.css";
@@ -21,5 +22,9 @@ const initialState: TaskStateModel = {
 export const App = () => {
   const [state, setState] = useState(initialState);
 
-  return <Home state={state} setState={setState} />;
+  return (
+    <TaskContextProvider>
+      <Home />
+    </TaskContextProvider>
+  );
 };
