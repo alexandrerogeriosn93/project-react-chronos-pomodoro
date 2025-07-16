@@ -16,7 +16,7 @@ export const MainForm = () => {
         />
       </div>
       <div className="formRow">
-        <p>Neste ciclo descanse por 5 minutos.</p>
+        <p>Próximo intervalo é de 5 min.</p>
       </div>
       <div className="formRow">
         <Cycles />
