@@ -63,6 +63,7 @@ export const MainForm = () => {
           labelText="task"
           placeholder="task"
           ref={taskNameInput}
+          disabled={!!state.activeTask}
         />
       </div>
       <div className="formRow">
