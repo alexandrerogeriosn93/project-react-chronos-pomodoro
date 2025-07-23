@@ -9,6 +9,7 @@ import { getNextCycleType } from "../../utils/getNextCycleType";
 import { Cycles } from "../Cycles";
 import { DefaultButton } from "../DefaultButton";
 import { DefaultInput } from "../DefaultInput";
+import { Tips } from "../Tips";
 
 export const MainForm = () => {
   const { state, dispatch } = useTaskContext();
@@ -59,7 +60,7 @@ export const MainForm = () => {
         />
       </div>
       <div className="formRow">
-        <p>Próximo intervalo é de 5 min.</p>
+        <Tips />
       </div>
       {state.currentCycle > 0 && (
         <div className="formRow">
