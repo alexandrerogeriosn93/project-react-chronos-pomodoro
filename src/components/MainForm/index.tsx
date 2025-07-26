@@ -1,6 +1,7 @@
 import { PlayCircleIcon, StopCircleIcon } from "lucide-react";
 import { useRef } from "react";
 
+import { showMessage } from "../../adapters/showMessage";
 import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { TaskModel } from "../../models/TaskModel";
@@ -20,13 +21,14 @@ export const MainForm = () => {
 
   const handleCreateNewTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    showMessage.dismiss();
 
     if (taskNameInput.current === null) return;
 
     const taskName = taskNameInput.current?.value.trim();
 
     if (!taskName) {
-      alert("Digite o nome da tarefa.");
+      showMessage.warning("Digite o nome da tarefa.");
       return;
     }
 
@@ -41,9 +43,12 @@ export const MainForm = () => {
     };
 
     dispatch({ type: TaskActionTypes.START_TASK, payload: newTask });
+    showMessage.success("Tarefa iniciada.");
   };
 
   const handleInterruptTask = () => {
+    showMessage.dismiss();
+    showMessage.info("Tarefa interrompida.");
     dispatch({ type: TaskActionTypes.INTERRUPT_TASK });
   };
 
