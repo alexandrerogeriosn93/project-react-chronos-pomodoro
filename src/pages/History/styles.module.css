@@ -44,3 +44,8 @@
 .tableThSort:hover {
   filter: brightness(80%);
 }
+
+.message {
+  text-align: center;
+  font-weight: bold;
+}
