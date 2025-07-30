@@ -5,6 +5,7 @@ import { DefaultButton } from "../../components/DefaultButton";
 import { Heading } from "../../components/Heading";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { MainTemplate } from "../../templates/MainTemplate";
+import { formatDate } from "../../utils/formatDate";
 import styles from "./styles.module.css";
 
 export const History = () => {
@@ -43,7 +44,7 @@ export const History = () => {
                   <tr key={task.id}>
                     <td>{task.name}</td>
                     <td>{task.duration}</td>
-                    <td>{new Date(task.startDate).toISOString()}</td>
+                    <td>{formatDate(task.startDate)}</td>
                     <td>{task.interruptDate}</td>
                     <td>{task.type}</td>
                   </tr>
