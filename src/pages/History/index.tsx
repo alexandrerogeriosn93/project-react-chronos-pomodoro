@@ -7,10 +7,12 @@ import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { MainTemplate } from "../../templates/MainTemplate";
 import { formatDate } from "../../utils/formatDate";
 import { getTaskStatus } from "../../utils/getTaskStatus";
+import { sortTasks } from "../../utils/sortTasks";
 import styles from "./styles.module.css";
 
 export const History = () => {
   const { state } = useTaskContext();
+  const sortedTasks = sortTasks({ tasks: state.tasks });
 
   return (
     <MainTemplate>
@@ -40,14 +42,20 @@ export const History = () => {
               </tr>
             </thead>
             <tbody>
-              {state.tasks.map((task) => {
+              {sortedTasks.map((task) => {
+                const taskTypeDictionary = {
+                  workTime: "Foco",
+                  shortBreakTime: "Descanso curto",
+                  longBreakTime: "Descanso longo",
+                };
+
                 return (
                   <tr key={task.id}>
                     <td>{task.name}</td>
                     <td>{task.duration}</td>
                     <td>{formatDate(task.startDate)}</td>
                     <td>{getTaskStatus(task, state.activeTask)}</td>
-                    <td>{task.type}</td>
+                    <td>{taskTypeDictionary[task.type]}</td>
                   </tr>
                 );
               })}
