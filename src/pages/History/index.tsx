@@ -1,6 +1,7 @@
 import { TrashIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
+import { showMessage } from "../../adapters/showMessage";
 import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { Heading } from "../../components/Heading";
@@ -14,6 +15,7 @@ import styles from "./styles.module.css";
 
 export const History = () => {
   const { state, dispatch } = useTaskContext();
+  const [confirmClearHistory, setConfirmClearHistory] = useState(false);
   const hasTasks = state.tasks.length > 0;
   const [sortTaskOptions, setSortTaskOptions] = useState<SortTasksOptions>(
     () => {
@@ -40,9 +42,10 @@ export const History = () => {
   };
 
   const handleResetHistory = () => {
-    if (!confirm("Deseja excluir o histórico?")) return;
-
-    dispatch({ type: TaskActionTypes.RESET_STATE });
+    showMessage.dismiss();
+    showMessage.confirm("Deseja excluir o histórico?", (confirmation) => {
+      setConfirmClearHistory(confirmation);
+    });
   };
 
   useEffect(() => {
@@ -56,11 +59,18 @@ export const History = () => {
     }));
   }, [state.tasks]);
 
+  useEffect(() => {
+    if (!confirmClearHistory) return;
+
+    setConfirmClearHistory(false);
+    dispatch({ type: TaskActionTypes.RESET_STATE });
+  }, [confirmClearHistory, dispatch]);
+
   return (
     <MainTemplate>
       <Container>
         <Heading>
-          <span>History</span>
+          <span>Histórico</span>
           {hasTasks && (
             <span className={styles.buttonContainer}>
               <DefaultButton
