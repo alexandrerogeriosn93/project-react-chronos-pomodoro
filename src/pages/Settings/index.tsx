@@ -6,12 +6,13 @@ import { Container } from "../../components/Container";
 import { DefaultButton } from "../../components/DefaultButton";
 import { DefaultInput } from "../../components/DefaultInput";
 import { Heading } from "../../components/Heading";
+import { TaskActionTypes } from "../../contexts/TaskContext/taskActions";
 import { useTaskContext } from "../../contexts/TaskContext/useTaskContext";
 import { MainTemplate } from "../../templates/MainTemplate";
 import styles from "./styles.module.css";
 
 export const Settings = () => {
-  const { state } = useTaskContext();
+  const { state, dispatch } = useTaskContext();
   const workTimeInput = useRef<HTMLInputElement>(null);
   const shortBreakTimeInput = useRef<HTMLInputElement>(null);
   const longBreakTimeInput = useRef<HTMLInputElement>(null);
@@ -21,11 +22,11 @@ export const Settings = () => {
     showMessage.dismiss();
 
     const workTime = Number(workTimeInput.current?.value);
-    const shorBreakTime = Number(shortBreakTimeInput.current?.value);
+    const shortBreakTime = Number(shortBreakTimeInput.current?.value);
     const longBreakTime = Number(longBreakTimeInput.current?.value);
     const formErrors = [];
 
-    if (isNaN(workTime) || isNaN(shorBreakTime) || isNaN(longBreakTime)) {
+    if (isNaN(workTime) || isNaN(shortBreakTime) || isNaN(longBreakTime)) {
       formErrors.push("Informe apenas números para salvar as configurações.");
     }
 
@@ -33,7 +34,7 @@ export const Settings = () => {
       formErrors.push("Informe valores entre 1 e 99 para foco.");
     }
 
-    if (shorBreakTime < 1 || shorBreakTime > 30) {
+    if (shortBreakTime < 1 || shortBreakTime > 30) {
       formErrors.push("Informe valores entre 1 e 30 para descanso curto.");
     }
 
@@ -46,6 +47,13 @@ export const Settings = () => {
         showMessage.error(error);
       });
     }
+
+    dispatch({
+      type: TaskActionTypes.CHANGE_SETTINGS,
+      payload: { workTime, shortBreakTime, longBreakTime },
+    });
+
+    showMessage.success("Configurações salvas.");
   };
 
   return (
